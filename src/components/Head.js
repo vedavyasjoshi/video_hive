@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { USER_IMAGE_URL, YOUTUBE_SEARCH_API } from "../utils/constants";
+import {
+  USER_IMAGE_URL,
+  YOUTUBE_SEARCH_API,
+  YOUTUBE_SUGGEST_API,
+} from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
+import { setVideoRecords } from "../utils/videoSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +19,7 @@ const Head = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchCache&& searchCache[searchQuery]) {
+      if (searchCache && searchCache[searchQuery]) {
         setSuggestions(searchCache[searchQuery]);
       } else {
         fetchSearchSuggestions();
@@ -26,10 +31,18 @@ const Head = () => {
   }, [searchQuery]);
 
   const fetchSearchSuggestions = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const data = await fetch(YOUTUBE_SUGGEST_API + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
     dispatch(cacheResults({ [searchQuery]: json[1] }));
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    dispatch(setVideoRecords(json.items));
+    setSearchQuery("");
   };
 
   useEffect(() => {
@@ -74,10 +87,11 @@ const Head = () => {
         </a>
       </div>
       <div className="col-span-10 px-10 ">
-        <div>
+        <form onSubmit={(e) => handleSearch(e)}>
           <input
             className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
             type="text"
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
@@ -85,29 +99,32 @@ const Head = () => {
           <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
             🔍
           </button>
-          {showSuggestions && suggestions.length && (
+          {showSuggestions && suggestions.length > 0 && (
             <div className="fixed bg-white py-2 px-2 w-[37rem] shadow-lg rounded-lg border border-gray-100">
               <ul>
                 {suggestions.map((s) => (
-                  <li key={s} className="py-2 px-3 shadow-sm hover:bg-gray-100">
+                  <li
+                    key={s}
+                    className="py-2 px-3 shadow-sm hover:bg-gray-100"
+                    onMouseDown={(e) => {
+                      setSearchQuery(s);
+                      setShowSuggestions(false);
+                      handleSearch(e)
+                    }}
+                  >
                     🔍 {s}
                   </li>
                 ))}
               </ul>
             </div>
           )}
-        </div>
+        </form>
       </div>
       <div className="col-span-1">
-        <img
-          className="h-8"
-          alt="user"
-          src={USER_IMAGE_URL}
-        />
+        <img className="h-8" alt="user" src={USER_IMAGE_URL} />
       </div>
     </div>
   );
 };
 
 export default Head;
- 
