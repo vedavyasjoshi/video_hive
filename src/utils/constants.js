@@ -17,3 +17,8 @@ export const USER_IMAGE_URL =
 export const LIVE_CHAT_COUNT = 25;
 
 export const VIDEO_COUNT = 100;
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+];

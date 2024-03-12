@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import {
+  SUPPORTED_LANGUAGES,
   USER_IMAGE_URL,
   YOUTUBE_SEARCH_API,
   YOUTUBE_SUGGEST_API,
 } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import { setVideoRecords } from "../utils/videoSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,6 +71,10 @@ const Head = () => {
     dispatch(toggleMenu());
   };
 
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="grid grid-flow-col p-2 m-2 shadow-lg">
       <div className="flex col-span-1">
@@ -109,7 +115,7 @@ const Head = () => {
                     onMouseDown={(e) => {
                       setSearchQuery(s);
                       setShowSuggestions(false);
-                      handleSearch(e)
+                      handleSearch(e);
                     }}
                   >
                     🔍 {s}
@@ -121,6 +127,16 @@ const Head = () => {
         </form>
       </div>
       <div className="col-span-1">
+        <select
+          className="p-2 m-2 bg-gray-900 text-white"
+          onChange={handleLanguageChange}
+        >
+          {SUPPORTED_LANGUAGES.map((lang) => (
+            <option key={lang.identifier} value={lang.identifier}>
+              {lang.name}
+            </option>
+          ))}
+        </select>
         <img className="h-8" alt="user" src={USER_IMAGE_URL} />
       </div>
     </div>

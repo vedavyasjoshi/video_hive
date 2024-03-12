@@ -1,12 +1,16 @@
 import React from "react";
 import Button from "./Button";
+import { useSelector } from "react-redux";
+import lang from "../utils/languageConstants";
 
 const ButtonList = () => {
+  const langKey = useSelector((store) => store.config.lang);
+
   const list = [
     "All",
     "Gaming",
     "Live",
-    "Cricket",
+    "cricket",
     "Cooking",
     "Songs",
     "News",
@@ -20,7 +24,7 @@ const ButtonList = () => {
   return (
     <div className="flex">
       {list.map((item) => (
-        <Button key={item} name={item} />
+        <Button key={item} name={lang[langKey][item] || item} />
       ))}
     </div>
   );
