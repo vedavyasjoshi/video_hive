@@ -4,12 +4,13 @@ import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideoRecords } from "../utils/videoSlice";
+import { openMenu } from "../utils/appSlice";
 
 const VideoContainer = () => {
   const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
-  const {records, nextPageToken} = useSelector((store) => store.video);
+  const { records, nextPageToken } = useSelector((store) => store.video);
 
   const fetchVideos = async () => {
     const data = await fetch(YOUTUBE_VIDEOS_API + nextPageToken);
@@ -24,6 +25,7 @@ const VideoContainer = () => {
 
   useEffect(() => {
     fetchVideos();
+    dispatch(openMenu());
   }, [page]);
 
   const handleScroll = () => {
@@ -44,7 +46,7 @@ const VideoContainer = () => {
     <div className="flex flex-wrap">
       {records &&
         records.map((video, index) => (
-          <Link key={video.id+index} to={"/watch?v=" + video.id}>
+          <Link key={video.id + index} to={"/watch?v=" + video.id}>
             <VideoCard info={video} />
           </Link>
         ))}

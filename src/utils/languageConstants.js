@@ -19,6 +19,7 @@ const lang = {
     sports: "Sports",
     subscriptons: "Subscriptions",
     "watch later": "Watch Later",
+    home: "Home",
   },
   hindi: {
     search: "खोज",
@@ -40,6 +41,7 @@ const lang = {
     sports: "खेल",
     subscriptons: "सदस्यता",
     "watch later": "बाद में देखना",
+    home: "घर",
   },
 };
 

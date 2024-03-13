@@ -12,10 +12,10 @@ const Sidebar = () => {
 
   return (
     isMenuOpen && (
-      <div className="p-5 shadow-lg w-48">
+      <div className="p-5 shadow-lg w-48 min-w-44">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="font-bold">{lang[langKey]["home"]}</Link>
           </li>
           {videoTypes.map((item) => (
             <li key={item}>{lang[langKey][item] || item}</li>
