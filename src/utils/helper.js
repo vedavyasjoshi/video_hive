@@ -1,3 +1,5 @@
+import { MAX_TITLE_LENGTH } from "./constants";
+
 var nameList = [
   "Time",
   "Past",
@@ -180,13 +182,20 @@ export function generateRandomName() {
 }
 
 export function makeRandomMessage(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }
+
+export const truncate = (str) => {
+  if (str.length <= MAX_TITLE_LENGTH) return str;
+  const res = str.slice(0, MAX_TITLE_LENGTH);
+  return res.slice(0, res.lastIndexOf(" ")) + " ...";
+};
