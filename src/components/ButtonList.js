@@ -7,18 +7,18 @@ const ButtonList = () => {
   const langKey = useSelector((store) => store.config.lang);
 
   const list = [
-    "All",
-    "Gaming",
-    "Live",
+    "all",
+    "gaming",
+    "live",
     "cricket",
-    "Cooking",
-    "Songs",
-    "News",
-    "Movies",
-    "Sitcoms",
-    "Motivation",
-    "Gadgets",
-    "Guitar",
+    "cooking",
+    "songs",
+    "news",
+    "movies",
+    "sitcoms",
+    "motivation",
+    "gadgets",
+    "guitar",
   ];
 
   return (

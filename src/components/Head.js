@@ -126,9 +126,9 @@ const Head = () => {
           )}
         </form>
       </div>
-      <div className="col-span-1">
+      <div className="col-span-1 flex justify-center">
         <select
-          className="p-2 m-2 bg-gray-900 text-white"
+          className="p-2 m-2 bg-white text-gray-900 border-[1px] border-gray-800 rounded-md"
           onChange={handleLanguageChange}
         >
           {SUPPORTED_LANGUAGES.map((lang) => (
@@ -137,7 +137,7 @@ const Head = () => {
             </option>
           ))}
         </select>
-        <img className="h-8" alt="user" src={USER_IMAGE_URL} />
+        <img className="h-8 relative top-[10px]" alt="user" src={USER_IMAGE_URL} />
       </div>
     </div>
   );
