@@ -11,7 +11,9 @@ const VideoCard = ({ info }) => {
       <ul>
         <li className="font-bold py-2">{truncate(title)}</li>
         <li>{channelTitle}</li>
-        {statistics && <li>{statistics.viewCount} views</li>}
+        {statistics && (
+          <li>{Number(statistics.viewCount).toLocaleString()} views</li>
+        )}
       </ul>
     </div>
   );
