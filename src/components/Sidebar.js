@@ -15,8 +15,11 @@ const Sidebar = () => {
     isMenuOpen && (
       <div className="p-5 shadow-lg w-48 min-w-44">
         <ul>
-          <li>
-            <Link to="/" className="font-bold">
+          <li className="mb-4">
+            <Link
+              to="/"
+              className="font-bold cursor-pointer px-8 py-2 bg-gray-300 hover:border-black hover:bg-gray-100 rounded-md "
+            >
               {lang[langKey]["home"]}
             </Link>
           </li>
