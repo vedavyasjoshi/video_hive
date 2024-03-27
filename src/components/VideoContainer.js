@@ -5,14 +5,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideoRecords } from "../utils/videoSlice";
 import { openMenu } from "../utils/appSlice";
+import Shimmer from "../utils/Shimmer";
 
 const VideoContainer = () => {
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const { records, nextPageToken } = useSelector((store) => store.video);
 
   const fetchVideos = async () => {
+    setIsLoading(true);
     const data = await fetch(YOUTUBE_VIDEOS_API + nextPageToken);
     const json = await data.json();
     dispatch(
@@ -21,6 +24,7 @@ const VideoContainer = () => {
         nextPageToken: json.nextPageToken,
       })
     );
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -44,6 +48,12 @@ const VideoContainer = () => {
 
   return (
     <div className="flex flex-wrap">
+      {isLoading &&
+        (() => {
+          let components = [];
+          for (let i = 0; i < 30; i++) components.push(<Shimmer key={i} />);
+          return components;
+        })()}
       {records &&
         records.map((video, index) => (
           <Link key={video.id + index} to={"/watch?v=" + video.id}>
