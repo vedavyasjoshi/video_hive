@@ -4,7 +4,7 @@ export const YOUTUBE_VIDEOS_API =
   "&pageToken=";
 
 export const YOUTUBE_SUGGEST_API =
-  "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://video-hive-be.onrender.com/api/suggest?searchText=";
 
 export const YOUTUBE_SEARCH_API =
   "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=" +
