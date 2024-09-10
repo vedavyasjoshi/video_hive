@@ -35,7 +35,7 @@ const LiveChat = () => {
         className="w-full pl-2 ml-2 border border-black"
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(addMessage({ name: "xyz", message: liveMsg }));
+          dispatch(addMessage({ name: "You", message: liveMsg }));
           setLiveMsg("");
         }}
       >
