@@ -4,40 +4,40 @@ import { USER_IMAGE_URL } from "../utils/constants";
 const CommentsContainer = () => {
   const commentsData = [
     {
-      name: "abc",
-      text: "def",
+      name: "Ram",
+      text: "Good Video",
       replies: [
         {
-          name: "abc",
-          text: "def",
+          name: "Suresh",
+          text: "It is interesting",
           replies: [
             {
-              name: "abc",
-              text: "def",
+              name: "Prakash",
+              text: "Nice video",
               replies: [],
             },
             {
-              name: "abc",
-              text: "def",
+              name: "Riya",
+              text: "Interesting",
               replies: [],
             },
           ],
         },
         {
-          name: "abc",
-          text: "def",
+          name: "Karthik",
+          text: "Wonderful",
           replies: [],
         },
       ],
     },
     {
-      name: "abc",
-      text: "def",
+      name: "Lakshmi",
+      text: "Beautiful video",
       replies: [],
     },
     {
-      name: "abc",
-      text: "def",
+      name: "Mani",
+      text: "It is good",
       replies: [],
     },
   ];

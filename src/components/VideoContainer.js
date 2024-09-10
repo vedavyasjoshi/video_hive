@@ -18,12 +18,14 @@ const VideoContainer = () => {
     setIsLoading(true);
     const data = await fetch(YOUTUBE_VIDEOS_API + nextPageToken);
     const json = await data.json();
-    dispatch(
-      addVideoRecords({
-        records: json.items,
-        nextPageToken: json.nextPageToken,
-      })
-    );
+    if (json?.items?.length > 0) {
+      dispatch(
+        addVideoRecords({
+          records: json.items,
+          nextPageToken: json.nextPageToken,
+        })
+      );
+    }
     setIsLoading(false);
   };
 
